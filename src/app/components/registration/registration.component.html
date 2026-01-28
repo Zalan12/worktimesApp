@@ -1,0 +1,64 @@
+<<<<<<< HEAD
+<div class="card xs:col-12 md:col-6 mx-auto px-3 text-center">
+    <h1>Registration</h1>
+
+<div class="mb-4">
+    <p-floatlabel>
+        <input pInputText id="name" [(ngModel)]="user.name" autocomplete="off" />
+        <label for="name">Username</label>
+    </p-floatlabel>
+
+<div class="mb-4">
+    <p-floatlabel>
+        <input pInputText id="email" [(ngModel)]="user.email" autocomplete="off" />
+        <label for="email">Email</label>
+    </p-floatlabel>
+    <p-floatlabel>
+    <p-password id="pass" class="mb-4" [(ngModel)]="user.password" [feedback]="false" [toggleMask]="true" />
+    <label for="pass">Password</label>
+    </p-floatlabel>
+        <p-floatlabel>
+    <p-password id="comf" class="mb-4" [(ngModel)]="user.confirm" [feedback]="false" [toggleMask]="true" />
+    <label for="comf">Comfirm password</label>
+    </p-floatlabel>
+
+    <p-button label="Registration" icon="pi pi-save" (click)="save()" />
+</div>
+=======
+<div class="card text-center xs:col-12 md:col-6 mx-auto px-3">
+    <h1>Registration</h1>
+
+    <h3>Register a new user</h3>
+
+    <div class="flex mb-4">
+        <p-floatlabel variant="on">
+            <input pInputText id="username" [(ngModel)]="user.name" autocomplete="off" />
+            <label for="username">Username</label>
+        </p-floatlabel>
+    </div>
+
+    <div class="flex mb-4">
+        <p-floatlabel variant="on">
+            <input pInputText id="email" [(ngModel)]="user.email" autocomplete="off" />
+            <label for="email">Email</label>
+        </p-floatlabel>
+    </div>
+
+    <div class="flex mb-4">
+        <p-floatlabel variant="on">
+            <p-password id="password" [(ngModel)]="user.password" autocomplete="off" [toggleMask]="true"/>
+            <label for="password">Password</label>
+        </p-floatlabel>
+    </div>
+
+    <div class="flex mb-4">
+        <p-floatlabel variant="on">
+            <p-password id="confirm" [(ngModel)]="user.confirm" autocomplete="off" [toggleMask]="true"/>
+            <label for="confirm">Confirm Password</label>
+        </p-floatlabel>
+    </div>
+
+        <p-button label="Registration" icon="pi pi-user" (onClick)="save()" />
+
+>>>>>>> d9d13c4c0c43c0e1df7b9d06f5d62517314f620c
+</div>
