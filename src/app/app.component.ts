@@ -8,24 +8,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-<<<<<<< HEAD
-  imports: [RouterOutlet, NavbarComponent,ProgressbarComponent,CommonModule],
-=======
   imports: [RouterOutlet, NavbarComponent, ProgressbarComponent, CommonModule],
->>>>>>> d9d13c4c0c43c0e1df7b9d06f5d62517314f620c
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
+
 export class AppComponent {
-  title = 'worktimes';
-<<<<<<< HEAD
-  loading$=inject(LoadingService).loading$;
-=======
+  title = 'worktimeapp';
   loading$ = inject(LoadingService).loading$;
 
-
-  constructor(
-  ) { }
-
->>>>>>> d9d13c4c0c43c0e1df7b9d06f5d62517314f620c
 }

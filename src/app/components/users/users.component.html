@@ -1,60 +1,61 @@
-<<<<<<< HEAD
-<div class="card xs:col-12 md:col-6 mx-auto px-3 text-center">
+<div class="card xs:col-12 md:col-10 lg:col-8 mx-auto px-3 text-center">
 
-    <h1>Users</h1>
+  <h1>Users</h1>
 
-    <p>Registered users list</p>
+  <h3>Registered users list</h3>
 
-    <p-table [value]="users"  [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template #header>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th class="text-right">Actions</th>
-=======
-<div class="card xs:col-12 lg:col-6 mx-auto px-3 text-center">
-    <h2>Users</h2>
-    <p>Registered users list</p>
 
-    <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template #header>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Registration</th>
-            <th>Last Login</th>
-            <th class="text-right">Operations</th>
->>>>>>> d9d13c4c0c43c0e1df7b9d06f5d62517314f620c
-        </tr>
-    </ng-template>
-    <ng-template #body let-user>
-        <tr>
-<<<<<<< HEAD
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
-            <td>
-                <p-button label="" icon="pi pi-file-edit" class="m-2"/>
-                <p-button label="" icon="pi pi-trash" class="m-2"/>
-=======
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.reg | date }}</td>
-            <td>{{ user.last | date }}</td>
-            <td class="flex justify-content-end">
-                <p-button label="Edit" class="mx-2"></p-button>
-                <p-button label="Delete" class="mx-2"></p-button>
->>>>>>> d9d13c4c0c43c0e1df7b9d06f5d62517314f620c
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+<div class="card">
+    <p-table
+      #dt
+      [value]="users"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 25, 50]"
+      [paginator]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      styleClass="p-datatable-striped"
+      selectionMode="single"
+      [globalFilterFields]="filterFields"
+    >
 
-<<<<<<< HEAD
-=======
+    <ng-template pTemplate="caption">
+      <div class="flex">
+          <p-iconField iconPosition="left" class="ml-auto">
+              <p-inputIcon>
+                  <i class="pi pi-search"></i>
+              </p-inputIcon>
+              <input
+                  pInputText
+                  type="text"
+                  (input)="handleInput($event)"
+                  placeholder="Search keyword" />
+          </p-iconField>
+      </div>
+  </ng-template>
 
->>>>>>> d9d13c4c0c43c0e1df7b9d06f5d62517314f620c
+        <ng-template pTemplate="header">
+            <tr>
+                <th>#</th>
+                <th pSortableColumn="name" >Name <p-sortIcon field="name" /></th>
+                <th pSortableColumn="email">Email <p-sortIcon field="email" /></th>
+                <th pSortableColumn="reg">Registration <p-sortIcon field="reg" /></th>
+                <th pSortableColumn="last">Last login <p-sortIcon field="last" /></th>
+                <th  class="text-right">Operations</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
+            <tr>
+                <td>{{ rowIndex +1 }}.</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.reg }}</td>
+                <td>{{ user.last }}</td>
+                <td class="text-right"><p-inputSwitch [(ngModel)]="user.status"/> </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+
 </div>

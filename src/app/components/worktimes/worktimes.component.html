@@ -1,1 +1,85 @@
-<p>worktimes works!</p>
+<div class="card xs:col-12 md:col-10 lg:col-8 mx-auto px-3 text-center">
+
+  <h1>Worktimes</h1>
+
+  <h3>Registered worktimes list</h3>
+
+
+  <div class="card flex justify-content-center w-full mb-3">
+    <p-floatLabel class="w-full">
+        <p-dropdown
+            [options]="users"
+            [(ngModel)]="selectedUser"
+            optionLabel="name"
+            optionValue="id"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            inputId="float-label"
+            styleClass="w-full text-left"
+            (onChange)="changeUser()"
+        />
+        <label for="float-label">Select a user</label>
+    </p-floatLabel>
+</div>
+
+
+
+<div class="card">
+  <p-table
+    #dt
+    [value]="worktimes"
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 25, 50]"
+    [paginator]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    styleClass="p-datatable-striped"
+    selectionMode="single"
+    [globalFilterFields]="filterFields"
+  >
+
+  <ng-template pTemplate="caption">
+    <div class="flex">
+
+      <p-button icon="pi pi-plus" label="New worktime" routerLink="/worktimes/new"></p-button>
+
+      <p-iconField iconPosition="left" class="ml-auto">
+            <p-inputIcon>
+                <i class="pi pi-search"></i>
+            </p-inputIcon>
+            <input
+                pInputText
+                type="text"
+                (input)="handleInput($event)"
+                placeholder="Search keyword" />
+        </p-iconField>
+    </div>
+</ng-template>
+
+      <ng-template pTemplate="header">
+          <tr>
+              <th>#</th>
+              <th pSortableColumn="date" >Date <p-sortIcon field="date" /></th>
+              <th pSortableColumn="user.name">User<p-sortIcon field="user.name" /></th>
+              <th pSortableColumn="start">Start <p-sortIcon field="start" /></th>
+              <th pSortableColumn="end">End <p-sortIcon field="end" /></th>
+              <th  class="text-right">Operations</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-worktime let-rowIndex="rowIndex">
+          <tr>
+              <td>{{ rowIndex +1 }}.</td>
+              <td>{{ worktime.date }}</td>
+              <td>{{ worktime.user!.name }}</td>
+              <td>{{ worktime.start }}</td>
+              <td>{{ worktime.end }}</td>
+              <td class="text-right">
+                <p-button icon="pi pi-pencil" class="mr-2" routerLink="/worktimes/{{worktime.id}}" severity="warning" [text]="true"></p-button>
+                <p-button icon="pi pi-trash" (click)="delete(worktime.id)" severity="danger" [text]="true"></p-button>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
+
+</div>

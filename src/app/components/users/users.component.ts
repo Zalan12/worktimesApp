@@ -1,73 +1,53 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { User } from '../../interfaces/user';
-import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
-=======
-import { Component } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { User } from '../../interfaces/user';
-import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
-import { Button } from 'primeng/button';
->>>>>>> d9d13c4c0c43c0e1df7b9d06f5d62517314f620c
+import { Table, TableModule } from 'primeng/table';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { FormsModule } from '@angular/forms';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-<<<<<<< HEAD
-  imports: [TableModule,ButtonModule],
+  imports: [TableModule, InputSwitchModule, FormsModule, IconFieldModule, InputIconModule, InputTextModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent implements OnInit{
+export class UsersComponent implements OnInit {
 
-  users:User[]=[];
+  users: User[] = [];
+  @ViewChild('dt') dt!: Table;
+  filterValue: string = '';
+  filterFields: string[] = ['name', 'email'];
 
   constructor(
     private api:ApiService
   ){}
 
   ngOnInit(): void {
-    this.getUsers();
-  }
-
-  getUsers()
-  {
-    this.api.selectAll('users').subscribe({
-      next:(res)=>{
-        this.users=res as User[];
-      },
-      error:(err)=>{
-        console.log(err.error.error)
-=======
-  imports: [CommonModule, TableModule, Button],
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
-})
-export class UsersComponent {
-
-  constructor(
-    private api: ApiService
-  ){} 
-
-  users: User[] = [];
-
-  ngOnInit() {
-    this.getUsers()
+      this.getUsers();
   }
 
   getUsers(){
     this.api.selectAll('users').subscribe({
-      next: (res) => {
-        console.log(res);
-        this.users = res as User[];
+      next: (res)=>{
+         this.users = res as User[];
+         this.users.forEach(user => {
+          user.status = (user.status) ? true : false
+         });
       },
-      error: (err) => {
-        console.error(err.error.error);
->>>>>>> d9d13c4c0c43c0e1df7b9d06f5d62517314f620c
+      error: (err)=>{
+        console.log(err.error.error)
       }
-    })
+    });
   }
+
+  handleInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.filterValue = inputElement.value;
+    this.dt.filterGlobal((this.filterValue), 'contains');
+  }
+
 }
